@@ -15,3 +15,6 @@ object:
 
 run: $(TARGET)
 	./$< $(TEST_CSV)
+
+clean:
+	rm $(OBJECT_FILES) $(TARGET)

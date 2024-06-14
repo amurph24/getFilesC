@@ -12,7 +12,7 @@ int findKeyIndex(char *line, char *keyname){
 	for(int i = 0; token; i++) {
 		// newline char disrupts check on last column header
 		token[strcspn( token, "\n")] = 0;
-		if (!strcmp(token, KEY_COLUMN_NAME))
+		if (!strcmp(token, keyname))
 			return i;
 		token = strtok(NULL, CSV_DELIMITER);
 	}
@@ -43,7 +43,7 @@ int getFiles(int argc, char *argv[]) {
 	FILE *file = fopen(argv[1], "r");
 	printFileContents(file);
 	fclose(file);
-
+	printf("%d args\n", argc);
 	return 0;
 }
 

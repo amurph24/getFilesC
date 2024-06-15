@@ -3,26 +3,38 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <regex.h>
 
 #define MAX_DEPTH 10
 #define SELF_DIRECTORY "."
 #define PARENT_DIRECTORY ".."
 
+int compare_regex(char* regex_string, char *string) {
+	regex_t regex;
+	regcomp(&regex, regex_string, 0);
+	return regexec(&regex, string, 0, NULL, 0);
+}
+
 int recursive_search_helper(char *path, char *key, int depth) {
 	// validate path
 	if (access(path, F_OK)) {
-		printf("'%s' cannot be accessed\n", path);
+		printf("%s cannot be accessed\n", path);
 		return 1;
 	}
 	
+	if ( !compare_regex(key, path) ) {
+		printf("%s matches key %s\n", path, key);
+		return 0;
+	}
+
+
 	DIR *dir = opendir(path);
 
 	// path is a file
 	if (!dir) {
-		printf("%s\n", path);
 		return 0;
 	}
-	
+
 	// path is a directory
 	if (depth >= MAX_DEPTH) {
 		printf("'%s' exceeds max depth %d, cancelling search\n", path, MAX_DEPTH);
@@ -34,7 +46,6 @@ int recursive_search_helper(char *path, char *key, int depth) {
 	int child_path_length;
 	struct dirent *dir_child;
 	
-	printf("%s\n", path);
 	while ((dir_child = readdir(dir)) != NULL) {
 		
 		if ( !strcmp(dir_child->d_name, SELF_DIRECTORY) ) continue;

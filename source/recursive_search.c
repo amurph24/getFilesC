@@ -30,29 +30,29 @@ int recursive_search_helper(char *path, char *key, int depth) {
 		return 1;
 	}
 
-	char *childPath = NULL;
+	char *child_path = NULL;
 	int child_path_length;
-	struct dirent *dirChild;
+	struct dirent *dir_child;
 	
 	printf("%s\n", path);
-	while ((dirChild = readdir(dir)) != NULL) {
+	while ((dir_child = readdir(dir)) != NULL) {
 		
-		if ( !strcmp(dirChild->d_name, SELF_DIRECTORY) ) continue;
-		if ( !strcmp(dirChild->d_name, PARENT_DIRECTORY) ) continue;
+		if ( !strcmp(dir_child->d_name, SELF_DIRECTORY) ) continue;
+		if ( !strcmp(dir_child->d_name, PARENT_DIRECTORY) ) continue;
 	
-		// resize childPath	
-		child_path_length = strlen(path) + 1 + strlen(dirChild->d_name) + 1;
-		childPath = (char*)malloc(child_path_length * sizeof(char));
+		// resize child_path 
+		child_path_length = strlen(path) + 1 + strlen(dir_child->d_name) + 1;
+		child_path = (char*)malloc(child_path_length * sizeof(char));
 
 		// get new path for recursive call
-		strcpy(childPath, path);
-		strcat(childPath, "/");
-		strcat(childPath, dirChild->d_name);
+		strcpy(child_path, path);
+		strcat(child_path, "/");
+		strcat(child_path, dir_child->d_name);
 
 		//recursion
-		recursive_search_helper(childPath, key, depth + 1);
+		recursive_search_helper(child_path, key, depth + 1);
 
-		free(childPath);
+		free(child_path);
 	}
 
 	closedir(dir);

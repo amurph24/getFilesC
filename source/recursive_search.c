@@ -5,7 +5,8 @@
 #include <stdio.h>
 
 #define MAX_DEPTH 10
-
+#define SELF_DIRECTORY "."
+#define PARENT_DIRECTORY ".."
 
 int recursive_search_helper(char *path, char *key, int depth) {
 	// validate path
@@ -27,20 +28,20 @@ int recursive_search_helper(char *path, char *key, int depth) {
 		printf("'%s' exceeds max depth %d, cancelling search", path, MAX_DEPTH);
 
 	char childPath[1024];
-	char *selfDir = ".", *parentDir = "..";
-	char slash = '/';
+	//char *selfDir = ".", *parentDir = "..";
+	//char slash = '/';
 
 	struct dirent *dirChild;
 	
 	printf("%s\n", path);
 	while ((dirChild = readdir(dir)) != NULL) {
 		
-		if ( !strcmp(dirChild->d_name, selfDir) ) continue;
-		if ( !strcmp(dirChild->d_name, parentDir) ) continue;
+		if ( !strcmp(dirChild->d_name, SELF_DIRECTORY) ) continue;
+		if ( !strcmp(dirChild->d_name, PARENT_DIRECTORY) ) continue;
 
-		// get new path for recursive call	
+		// get new path for recursive call
 		strcpy(childPath, path);
-		strncat(childPath, &slash, 1);
+		strcat(childPath, "/");
 		strcat(childPath, dirChild->d_name);
 
 		//recursion

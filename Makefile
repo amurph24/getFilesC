@@ -14,7 +14,10 @@ object:
 	$(COMPILER) $(COMPILER_FLAGS) -c $(SOURCE_FILES)
 
 run: $(TARGET)
-	./$< $(TEST_CSV)
+	@echo "\n======================================="
+	@echo "executing $(TARGET) on $(TEST_CSV)..."
+	@echo "======================================="
+	@./$< $(TEST_CSV)
 
 clean:
 	rm $(OBJECT_FILES) $(TARGET)

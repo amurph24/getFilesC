@@ -3,7 +3,7 @@ TARGET = getFiles
 OBJECT_FILES =  ./*.o
 COMPILER_FLAGS = -Wall -Wextra -pedantic-errors
 SOURCE_FILES = source/*.c
-TEST_CSV = ./names.csv
+TEST_CSV = names.csv
 INCLUDE_PATH = -I include/
 
 all: $(TARGET)
@@ -16,7 +16,7 @@ object:
 
 run: $(TARGET)
 	@echo "\n======================================="
-	@echo "executing $(TARGET) on $(TEST_CSV)..."
+	@echo "executing ./$< on $(TEST_CSV)..."
 	@echo "======================================="
 	@./$< $(TEST_CSV)
 

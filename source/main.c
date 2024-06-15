@@ -12,7 +12,7 @@ int get_files(int argc, char *argv[]) {
 	print_file_contents(file);
 	fclose(file);
 
-	recursive_search(".", "7");
+	recursive_search(".", argv[1]);
 
 	printf("%d args\n", argc);
 	return 0;

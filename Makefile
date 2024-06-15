@@ -3,7 +3,7 @@ TARGET = getFiles
 OBJECT_FILES =  ./*.o
 COMPILER_FLAGS = -Wall -Wextra -pedantic-errors
 SOURCE_FILES = source/*.c
-TEST_CSV = names.csv
+TEST_CSV = name
 INCLUDE_PATH = -I include/
 
 all: $(TARGET)

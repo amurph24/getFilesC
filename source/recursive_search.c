@@ -25,7 +25,7 @@ int recursive_search_helper(char *path, char *key, int depth) {
 	
 	// path is a directory
 	if (depth >= MAX_DEPTH) {
-		printf("'%s' exceeds max depth %d, cancelling search", path, MAX_DEPTH);
+		printf("'%s' exceeds max depth %d, cancelling search\n", path, MAX_DEPTH);
 		closedir(dir);
 		return 1;
 	}

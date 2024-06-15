@@ -50,7 +50,7 @@ int getFiles(int argc, char *argv[]) {
 	printFileContents(file);
 	fclose(file);
 
-	recursive_search(".", "key", 0);
+	recursive_search(".", "key");
 
 	printf("%d args\n", argc);
 	return 0;

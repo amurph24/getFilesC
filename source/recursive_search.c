@@ -6,7 +6,8 @@
 
 #define MAX_DEPTH 10
 
-int recursive_search(char *path, char *key, int depth) {
+
+int recursive_search_helper(char *path, char *key, int depth) {
 	// validate path
 	if (access(path, F_OK)) {
 		printf("'%s' cannot be accessed\n", path);
@@ -43,11 +44,14 @@ int recursive_search(char *path, char *key, int depth) {
 		strcat(childPath, dirChild->d_name);
 
 		//recursion
-		recursive_search(childPath, key, depth + 1);
+		recursive_search_helper(childPath, key, depth + 1);
 	}
 
 	closedir(dir);
 	return 0;
 }
 
+int recursive_search(char *path, char *key) {
+	return recursive_search_helper(path, key, 0);
+}
 

@@ -8,25 +8,25 @@
 #define KEY_COLUMN_NAME "key"
 #define CSV_DELIMITER ","
 
-int findKeyIndex(char *line, char *keyname){
+int find_key_index(char *line, char *key_name){
 	char *token;
 	token = strtok(line, CSV_DELIMITER);
 	for(int i = 0; token; i++) {
 		// newline char disrupts check on last column header
 		token[strcspn( token, "\n")] = 0;
-		if (!strcmp(token, keyname))
+		if (!strcmp(token, key_name))
 			return i;
 		token = strtok(NULL, CSV_DELIMITER);
 	}
 	return -1;
 }
 
-void printFileContents(FILE *file) {
+void print_file_contents(FILE *file) {
 	char line[ROW_CHAR_LIMIT];
 	
 	// parse headings for index of key column
 	fgets(line, ROW_CHAR_LIMIT, file);
-	int key_column_index = findKeyIndex(line, KEY_COLUMN_NAME);
+	int key_column_index = find_key_index(line, KEY_COLUMN_NAME);
 	printf("index of 'key' column: %d\n", key_column_index);
 	if (key_column_index == -1) {
 		printf(
@@ -43,11 +43,11 @@ void printFileContents(FILE *file) {
 }
 
 
-int getFiles(int argc, char *argv[]) {
+int get_files(int argc, char *argv[]) {
 	printf("Printing contents of: %s\n", argv[1]);
 
 	FILE *file = fopen(argv[1], "r");
-	printFileContents(file);
+	print_file_contents(file);
 	fclose(file);
 
 	recursive_search(".", "key");
@@ -57,6 +57,6 @@ int getFiles(int argc, char *argv[]) {
 }
 
 int main(int argc, char *argv[]){
-	getFiles(argc, argv);
+	get_files(argc, argv);
 	return 0;
 }

@@ -20,11 +20,14 @@ int get_files(int argc, char *argv[]) {
 
 	recursive_search(".", argv[1]);
 
-	printf("%d args\n", argc);
 	return 0;
 }
 
 int main(int argc, char *argv[]){
+	if (argc != 2) {
+		printf("usage: getFiles <regex>\n");
+		return 1;
+	}
 	get_files(argc, argv);
 	return 0;
 }

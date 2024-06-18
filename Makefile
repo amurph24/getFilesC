@@ -21,4 +21,4 @@ run: $(TARGET)
 	@./$< $(TEST_CSV)
 
 clean:
-	rm $(OBJECT_FILES) $(TARGET)
+	rm $(OBJECT_FILES) $(TARGET) names.csv

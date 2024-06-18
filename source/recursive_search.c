@@ -9,11 +9,25 @@
 #define SELF_DIRECTORY "."
 #define PARENT_DIRECTORY ".."
 
+/*
+This function compares a regex string to an input string
+
+input: regex and a string to check
+output: 0 if a match is found, 1 if not
+*/
 int compare_regex(char* regex_string, char *string) {
 	regex_t regex;
 	regcomp(&regex, regex_string, 0);
 	return regexec(&regex, string, 0, NULL, 0);
 }
+
+/*
+recursive_search_helper is a helper for recursive_search,
+it is recursively called to search search for the key up to a max depth of MAX_DEPTH.
+
+Input: a path to search for the regex key, and the depth of the current search.
+Output: 0 if the function executes correctly, 1 if an error is encountered.
+*/
 
 int recursive_search_helper(char *path, char *key, int depth) {
 	// validate path
@@ -70,6 +84,14 @@ int recursive_search_helper(char *path, char *key, int depth) {
 	return 0;
 }
 
+/*
+recursive_search traverses a directory recursively,
+searching for regex matches to a given key.
+
+Input: a directory (path) to search, and a regex key to match file or directory paths.
+Output: 0 if the function succesfully compares at least one file, 1 otherwise.
+
+*/
 int recursive_search(char *path, char *key) {
 	return recursive_search_helper(path, key, 0);
 }

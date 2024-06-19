@@ -29,7 +29,7 @@ Input: a path to search for the regex key, and the depth of the current search.
 Output: 0 if the function executes correctly, 1 if an error is encountered.
 */
 
-int recursive_search_helper(char *path, char *key, void (*func)(char*), int depth) {
+int recursive_search_helper(char *path, char *key, int (*func)(char*), int depth) {
 	// validate path
 	if (access(path, F_OK)) {
 		printf("%s cannot be accessed\n", path);
@@ -91,7 +91,7 @@ Input: a directory (path) to search, and a regex key to match file or directory 
 Output: 0 if the function succesfully compares at least one file, 1 otherwise.
 
 */
-int recursive_search(char *path, char *key, void (*func)(char*)) {
+int recursive_search(char *path, char *key, int (*func)(char*)) {
 	return recursive_search_helper(path, key, func, 0);
 }
 

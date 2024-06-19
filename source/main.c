@@ -6,9 +6,8 @@
 #include "read_data.h"
 #include "file_utils.h"
 
-void custom_puts(char *string) {
-	puts(string);
-	return;
+int custom_puts(char *string) {
+	return puts(string);
 }
 
 int get_files(int argc, char *argv[]) {

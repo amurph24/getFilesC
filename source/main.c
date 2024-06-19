@@ -6,6 +6,11 @@
 #include "read_data.h"
 #include "file_utils.h"
 
+void custom_puts(char *string) {
+	puts(string);
+	return;
+}
+
 int get_files(int argc, char *argv[]) {
 	//silences pedantic warnings, remove later
 	printf("received %d args\n", argc);
@@ -22,7 +27,7 @@ int get_files(int argc, char *argv[]) {
 	}
 	*/
 
-	recursive_search(".", argv[1]);
+	recursive_search(".", argv[1], custom_puts);
 	//copy_file("test/names.csv", ".");
 	return 0;
 }

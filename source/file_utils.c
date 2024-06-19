@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 int is_directory(const char *path) {
 	struct stat statbuf;
@@ -43,27 +45,34 @@ void copy_file(char* file_path, char* output_path) {
 	build_clone_path(clone_path, file_path, output_path);
 
 	// open file streams
-	FILE *original_file, *clone_file;
+	FILE *original_file;
 	original_file = fopen(file_path, "rb");
-	clone_file = fopen(clone_path, "ab");
-	
-	if (clone_file == NULL || original_file == NULL) {
-		printf(
-			"failed to read %s into new file: %s,\nexiting...\n",
-			file_path,
-			clone_path
-		);
+	if ( original_file == NULL ) {
+		printf("failed to read %s, cannot copy\n", file_path);
+		return;
+	}
+
+	int clone_file;
+	clone_file = open(	clone_path,
+				O_CREAT | O_WRONLY | O_EXCL | O_APPEND,
+				S_IRUSR | S_IWUSR);
+	if (clone_file < 0) {
+		printf("%s already exists, won't copy %s\n", clone_path, file_path);
+		fclose(original_file);
 		return;
 	}
 	
 	// copy file contents
-	int buffer;
+	char buffer;
+	char *char_buffer = NULL;
 	while ( (buffer = fgetc(original_file)) != EOF ) {
-		fprintf(clone_file, "%c", buffer);
+		char_buffer = &buffer;
+		write(clone_file, char_buffer, 1);
 	}
+	printf("%s succesfully copied\n", file_path);
 
 	fclose(original_file);
-	fclose(clone_file);
+	close(clone_file);
 	free(clone_path);
 	return;
 }

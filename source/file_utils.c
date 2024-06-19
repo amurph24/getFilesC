@@ -1,6 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/stat.h>
+
+int is_directory(const char *path) {
+	struct stat statbuf;
+	if ( stat(path, &statbuf) != 0 ) {
+		return 0;
+	}
+	return S_ISDIR(statbuf.st_mode);
+}
 
 /*
 `build_clone_path` takes the name of the file located at `file_path`,

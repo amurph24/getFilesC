@@ -6,8 +6,10 @@
 #include "read_data.h"
 #include "file_utils.h"
 
-int custom_puts(char *string) {
-	return puts(string);
+int custom_copy_file(char *file_path) {
+	char *output_dir = "test/out";
+	copy_file(file_path, output_dir);
+	return 0;
 }
 
 int get_files(int argc, char *argv[]) {
@@ -26,7 +28,7 @@ int get_files(int argc, char *argv[]) {
 	}
 	*/
 
-	recursive_search(".", argv[1], custom_puts);
+	recursive_search(".", argv[1], custom_copy_file);
 	//copy_file("test/names.csv", ".");
 	return 0;
 }

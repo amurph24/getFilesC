@@ -13,6 +13,19 @@ int is_directory(const char *path) {
 	return S_ISDIR(statbuf.st_mode);
 }
 
+int mkdir_or_exists(char *output_dir) {
+	if (!mkdir(output_dir, 00700))
+		return 1; // dir was created
+	// dir wasn't created
+	if (is_directory(output_dir))
+		return 1;
+	printf(	"file exists with the name '%s',\n"
+		"an output directory with the same name cannot be created\n",
+		output_dir);
+	return 0;
+}
+
+
 /*
 `build_clone_path` takes the name of the file located at `file_path`,
 and appends it to the `new_dir_path` delimited by a '/', stored in `new_path`.

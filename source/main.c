@@ -6,27 +6,23 @@
 #include "read_data.h"
 #include "file_utils.h"
 
+#define OUTPUT_DIR "out"
+
 int custom_copy_file(char *file_path) {
-	char *output_dir = "test/out";
+	char *output_dir = OUTPUT_DIR;
 	copy_file(file_path, output_dir);
 	return 0;
 }
 
+
 int get_files(int argc, char *argv[]) {
 	//silences pedantic warnings, remove later
 	printf("received %d args\n", argc);
-	
-	/*
-	FILE *file = fopen(argv[1], "r");
-	if ( file != NULL) {
-		printf("Printing contents of: %s\n", argv[1]);
-		print_file_contents(file);
-		fclose(file);
+
+	if ( !mkdir_or_exists(OUTPUT_DIR) ) {
+		printf("exiting...\n");
+		return 1;
 	}
-	else {
-		printf("%s not found\n", argv[1]);
-	}
-	*/
 
 	recursive_search(".", argv[1], custom_copy_file);
 	//copy_file("test/names.csv", ".");

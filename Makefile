@@ -24,7 +24,7 @@ test: $(TARGET)
 	touch test/out/filler
 	rm test/out/*
 	@echo "\n======================================="
-	@echo "executing ./$< on $(TEST_CSV)..."
+	@echo "executing ./$< on $(TEST_ARG)..."
 	@echo "======================================="
 	@./$< $(TEST_ARG)
 

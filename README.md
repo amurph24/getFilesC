@@ -1,7 +1,7 @@
 # getFilesC
-Move specified files from one dir to another.
+Move specified files from one dir to another, I use it to move photos with dates in the filename.
 
-This executable was tested on a Debian system, will not work on Windows or MACOS.
+This executable was tested on a Debian system, and will not work on Windows or MACOS.
 
 ## Required Dependencies
 ```
@@ -24,7 +24,7 @@ If you are looking for a list of commands to run, here they are:
 git clone https://github.com/amurph24/getFilesC.git
 cd getFilesC
 sudo make install
-make clean
+sudo make clean
 ```
 To uninstall, navigate to the getFilesC directory and run:
 ```

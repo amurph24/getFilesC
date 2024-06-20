@@ -40,7 +40,7 @@ int recursive_search_helper(char *path, char *key, int (*func)(char*), int depth
 	
 	// is path a file?
 	if ( !is_directory(path) ) {
-		if (!compare_regex(key, path))
+		if (!compare_regex(key, strrchr(path, '/') + 1 ))
 			(*func)(path);
 		return 0;
 	}

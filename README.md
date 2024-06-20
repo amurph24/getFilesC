@@ -1,5 +1,7 @@
 # getFilesC
-move specified files from one dir to another
+Move specified files from one dir to another.
+
+This executable was tested on a Debian system, will not work on Windows or MACOS.
 
 ## Required Dependencies
 ```
@@ -7,19 +9,43 @@ git
 gcc
 make
 ```
+These packages are fairly common, and can be installed on Debian based systems using `apt`:
+```
+sudo apt install git gcc make
+```
 
 ## Installation
-TODO
+Clone the repository and, with root access, run `make install` followed by `make clean` to install `getFiles`.
+
+With root access run `make uninstall` to uninstall the `getFiles` executable.
+
+If you are looking for a list of commands to run, here they are:
+```
+git clone https://github.com/amurph24/getFilesC.git
+cd getFilesC
+sudo make install
+make clean
+```
+To uninstall, navigate to the getFilesC directory and run:
+```
+sudo make uninstall
+```
 
 ## Usage
-
-## WIP
-Search directory tree recursively for files matching regex input, and copy matching files into an 'out' folder. Be wary of hard disk space.
+Search directory tree (rooted at the current directory) recursively for files matching regex input,
+and copy matching files into an './out' folder. Be wary of hard disk space.
 ```
+getFiles [regex]
 getFiles "22\-04\-2000"
 ```
+If an `./out` folder doesn't exist one will be created, the script will exit if an `./out` file exists.
 
-Iterative over keys in .csv file with `-f` flag, perform directory search for each key (as regex) and move into 'out' folder. Be wary of hard disk space.
+## Upcoming
+The `-f` option prompts the script to iterate over a .csv file, using the strings in the `key` column as the regex.
 ```
-getFiles -f names.csv
+getFiles -f [<file.csv>]
+getFiles -f students.csv
 ```
+Other planned flags/options:
+ - `--first-only`: only copies the first file found, this is helpful if you are only expecting one file to match.
+ - `--directory [<dirpath/>]`: relative path to the directory to search, files will still be copied to `./out`.

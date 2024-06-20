@@ -20,7 +20,7 @@ $(TARGET): object
 object:
 	$(COMPILER) $(COMPILER_FLAGS) $(INCLUDE_PATH) -c $(SOURCE_FILES)
 
-run: $(TARGET)
+test: $(TARGET)
 	touch test/out/filler
 	rm test/out/*
 	@echo "\n======================================="

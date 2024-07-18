@@ -15,10 +15,7 @@ int custom_copy_file(char *file_path) {
 }
 
 
-int get_files(int argc, char *argv[]) {
-	//silences pedantic warnings, remove later
-	printf("received %d args\n", argc);
-
+int get_files(char *argv[]) {
 	if ( !mkdir_or_exists(OUTPUT_DIR) ) {
 		printf("exiting...\n");
 		return 1;
@@ -35,6 +32,6 @@ int main(int argc, char *argv[]){
 		printf("usage: getFiles <regex>\n");
 		return 1;
 	}
-	get_files(argc, argv);
+	get_files(argv);
 	return 0;
 }

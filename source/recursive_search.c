@@ -15,7 +15,7 @@
 This function compares a regex string to an input string
 
 input: regex and a string to check
-output: 0 if a match is found, 1 if not
+output: 0 if regex and string match, 1 if not
 */
 int compare_regex(char* regex_string, char *string) {
 	regex_t regex;
@@ -26,8 +26,10 @@ int compare_regex(char* regex_string, char *string) {
 /*
 recursive_search_helper is a helper for recursive_search,
 it is recursively called to search for the key up to a max depth of MAX_DEPTH.
+Files that match the searched regex will have their filepaths passed to the given function.
 
-Input: a path to search for the regex key, and the depth of the current search.
+Input: a path to search for the regex key, the regex key,
+	a pointer to the function, and the depth of the current search.
 Output: 0 if the function executes correctly, 1 if an error is encountered.
 */
 
@@ -84,10 +86,12 @@ int recursive_search_helper(char *path, char *key, int (*func)(char*), int depth
 recursive_search traverses a directory recursively,
 searching for regex matches to a given key.
 
-Input: a directory (path) to search, and a regex key to match file or directory paths.
-Output: 0 if the function succesfully compares at least one file, 1 otherwise.
-
+Input: a directory (path) to search, a regex key to match file paths,
+	and a function pointer.
+Output: 0 if the function succesfully matches and applies the function pointer to
+	one file, 1 otherwise.
 */
+
 int recursive_search(char *path, char *key, int (*func)(char*)) {
 	return recursive_search_helper(path, key, func, 0);
 }

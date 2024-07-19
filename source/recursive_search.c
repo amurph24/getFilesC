@@ -92,7 +92,7 @@ Output: 0 if the function succesfully matches and applies the function pointer t
 	one file, 1 otherwise.
 */
 
-int recursive_search(char *path, char *key, int (*func)(char*)) {
-	return recursive_search_helper(path, key, func, 0);
+int recursive_search(char *search_dir, char *search_key, int (*func)(char*)) {
+	return recursive_search_helper(search_dir, search_key, func, 0);
 }
 

@@ -22,7 +22,7 @@ object:
 
 test: $(TARGET)
 	touch test/out/filler
-	rm test/out/*
+	rm out/*
 	@echo "\n======================================="
 	@echo "executing ./$< on $(TEST_ARG)..."
 	@echo "======================================="
